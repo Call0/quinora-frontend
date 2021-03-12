@@ -14,9 +14,13 @@ export default new Vuex.Store({
     categoryList: [],
     searchByQuestionList: [],
     searchByUserList: [],
-    questionImages: []
+    questionImages: [],
+    userDetails: {}
   },
   getters: {
+    getUserDetails (state) {
+      return state.userDetails
+    },
     getQuestionImages (state) {
       return state.questionImages
     },
@@ -40,6 +44,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setUserDetails (state, value) {
+      state.userDetails = value
+    },
     setQuestionImages (state, value) {
       state.questionImages = value
     },
@@ -63,6 +70,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setUserDetailsAction ({ commit, state }, object) {
+      commit('setUserDetails', object)
+    },
     setQuestionRequestAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',

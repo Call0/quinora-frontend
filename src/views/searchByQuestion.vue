@@ -8,7 +8,7 @@
       <div>
         <div v-for="item in getSearchByQuestionList" :key="item.id" class="s-b-q-question-answer-card">
           <headComponentQAHome :username="item.username" />
-          <questionComponentSearch :question="item.questionText" :category="item.category" :src="item.src" :id="item.questionId" :createdAt="item.createdAt" />
+          <questionComponentSearch :question="item.questionText" :category="item.category" :src="item.questionImage" :id="item.questionId" :createdAt="item.createdAt" />
         </div>
       </div>
     </div>

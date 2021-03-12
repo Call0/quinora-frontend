@@ -16,8 +16,23 @@
       </select>
       <input type="text" :name="searchTerm" v-model="searchTerm" placeholder="Search...">
       <button type="submit" @click="onSearch" id="searchButton">Search</button>
-      <img src="../assets/user.png" id="profile">
-      <img src="../assets/more.png" id="more" @click="onClickMenu()" alt="">
+      <!--<img src="../assets/user.png" id="profile">
+      <img src="../assets/more.png" id="more" @click="onClickMenu()" alt="">-->
+
+      <div class="p-action">
+          <div class="profile"  @click="menuToggle()">
+              <img src="../assets/profile.png">
+          </div>
+          <div class="menu">
+              <div class="p-profile">
+                  <router-link to="/profilePage"><img src="../assets/profile.png"></router-link>
+              </div>
+              <router-link to="/profilePage"><h3>{{ userName }}</h3></router-link>
+              <ul>
+                  <li><router-link to="/"><img src="../assets/logout.png">Logout</router-link></li>
+              </ul>
+          </div>
+      </div>
   </div>
 </template>
 <script>
@@ -26,12 +41,14 @@ export default {
   data () {
     return {
       searchTerm: '',
-      filterType: localStorage.getItem('filterType')
+      filterType: localStorage.getItem('filterType'),
+      userName: localStorage.getItem('username')
     }
   },
   methods: {
-    onClickMenu () {
-      alert('sad')
+    menuToggle () {
+      const toggleMenu = document.querySelector('.menu')
+      toggleMenu.classList.toggle('active')
     },
     onSearch () {
       if (this.filterType === 'question') {
@@ -136,5 +153,66 @@ export default {
     img {
         width:30px;
         height: 25px;
+    }
+    .p-action
+    {
+        position: fixed;
+        top: 20px;
+        right: 200px;
+        cursor: pointer
+    }
+    .p-action .p-profile
+    {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    .p-action .p-profile img
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+    }
+    .p-action .menu
+    {
+        position: absolute;
+        top: 60px;
+        right: -10px;
+        padding: 10px 20px;
+        background: #fff;
+        width: 200px;
+        border-radius: 15px;
+        transition: 0.5s;
+        border: 1px solid;
+        opacity: 0;
+    }
+    .p-action .menu.active
+    {
+        top: 50px;
+        visibility: visible;
+        opacity: 1;
+    }
+    .p-action .menu h3
+    {
+        width: 100%;
+        padding: 20px 0;
+        font-weight: 500;
+        font-size: 15px;
+        color: #555;
+    }
+    .p-action .menu ul li a
+    {
+        display: inline-block;
+        color: #555;
+        transition: 0.5s;
+    }
+    .p-action .menu ul li:hover a
+    {
+        color: #ff5d94;
     }
 </style>

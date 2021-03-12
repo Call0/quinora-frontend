@@ -9,7 +9,7 @@
                 <td class='middle'>
                   <div class="inside-middle">
                     <headComponentQAHome :username="getParticularQuestion.username" />
-                    <questionComponentHome :question="getParticularQuestion.questionText" :category="getParticularQuestion.category" :src="getParticularQuestion.src" :id="getParticularQuestion.q" :createdAt="getParticularQuestion.createdAt" />
+                    <questionComponentHome :question="getParticularQuestion.questionText" :category="getParticularQuestion.category" :src="getParticularQuestion.questionImage" :id="getParticularQuestion.q" :createdAt="getParticularQuestion.createdAt" />
                     <button class="a-btn" @click="toggleInput" :value="getParticularQuestion.questionId">Answer</button>
                     <inputWidget :id="getParticularQuestion.questionId" :cid="getParticularQuestion.questionId" class="q-initial-style"/>
                   </div>
