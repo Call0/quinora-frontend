@@ -15,7 +15,7 @@
             <div v-if="pageOfItems.length > 0">
               <div v-for="item in pageOfItems" :key="item.id" class="question-answer-card">
                 <headComponentQAHome :username="item.username" />
-                <questionComponentHome :question="item.questionText" :category="item.category" :src="item.src" :id="item.questionId" :createdAt="item.createdAt" />
+                <questionComponentHome :question="item.questionText" :src="item.questionImage" :category="item.category" :id="item.questionId" :createdAt="item.createdAt" />
                 <div v-if="item.username === currentUser">
                   <button class="d-a-btn" @click="deleteQues" :value="item.questionId">Delete</button>
                 </div>
@@ -72,11 +72,11 @@ export default {
       customLabels,
       questionShow: false,
       pageOfItems: [],
+      images: []
     }
   },
   methods: {
     onChangePage (pageOfItems) {
-      // update page of items
       this.pageOfItems = pageOfItems
     },
     toggleQuestion () {
@@ -101,7 +101,7 @@ export default {
     questionsInputWidget: questionsInputWidget
   },
   computed: {
-    ...mapGetters(['getAllQuestions'])
+    ...mapGetters(['getAllQuestions', 'getQuestionImages'])
   },
   created () {
     this.$store.dispatch('setGetAllQuestionsAction')

@@ -8,6 +8,7 @@
                 </td>
                 <td class='middle'>
                   <div class="inside-middle">
+                    <headComponentQAHome :username="getParticularQuestion.username" />
                     <questionComponentHome :question="getParticularQuestion.questionText" :category="getParticularQuestion.category" :src="getParticularQuestion.src" :id="getParticularQuestion.q" :createdAt="getParticularQuestion.createdAt" />
                     <button class="a-btn" @click="toggleInput" :value="getParticularQuestion.questionId">Answer</button>
                     <inputWidget :id="getParticularQuestion.questionId" :cid="getParticularQuestion.questionId" class="q-initial-style"/>
@@ -24,7 +25,7 @@
                       <div v-for="item in getQuestionAnswerData" :key="item.id">
                           <div class="q-a-parent">
                               <headComponentAnswer :username="item.userName.substring(0,1).toUpperCase() + '' + item.userName.substring(1,item.userName.length)" />
-                              <answerComponentHome :answer="item.answerText.substring(0,1).toUpperCase() + '' + item.answerText.substring(1,item.answerText.length)" :src="item.src" />
+                              <answerComponentHome :answer="item.answerText.substring(0,1).toUpperCase() + '' + item.answerText.substring(1,item.answerText.length)" :src="item.imgsrc" />
                               <footComponentQAHome :comments="item.commentList.length" :upvotes="item.likes" :downvotes="item.dislikes" :cid="item.questionID+''+item.id" :commentsData="item.commentList" :answerId="item.id" />
                               <div v-if="item.userName === currentUser">
                                 <button class="a-btn" @click="deleteAns(item.id, item.questionID)">Delete</button>
@@ -48,6 +49,7 @@
 import inputWidget from '../components/inputWidget.vue'
 import { mapGetters } from 'vuex'
 import navbar from '../components/navbar.vue'
+import headComponentQAHome from '../components/headComponentQAHome.vue'
 import headComponentAnswer from '../components/headComponentAnswer.vue'
 import answerComponentHome from '../components/answerComponentHome.vue'
 import footComponentQAHome from '../components/footComponentQAHome.vue'
@@ -93,7 +95,8 @@ export default {
     footComponentQAHome: footComponentQAHome,
     questionComponentHome: questionComponentHome,
     navbar: navbar,
-    inputWidget: inputWidget
+    inputWidget: inputWidget,
+    headComponentQAHome: headComponentQAHome
   }
 }
 </script>
@@ -134,6 +137,7 @@ export default {
       margin-right: -10px;
       padding: 10px;
       border-radius: 10px;
+      background-color: whitesmoke;
     }
     .middle{
       width: 490px;

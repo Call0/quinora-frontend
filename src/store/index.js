@@ -13,9 +13,13 @@ export default new Vuex.Store({
     particularQuestion: {},
     categoryList: [],
     searchByQuestionList: [],
-    searchByUserList: []
+    searchByUserList: [],
+    questionImages: []
   },
   getters: {
+    getQuestionImages (state) {
+      return state.questionImages
+    },
     getQuestionAnswerData (state) {
       return state.questionAnswerData
     },
@@ -36,6 +40,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setQuestionImages (state, value) {
+      state.questionImages = value
+    },
     setQuestionAnswerData (state, value) {
       state.questionAnswerData = value
     },
@@ -66,6 +73,7 @@ export default new Vuex.Store({
           questionTitle: object.questionTitle,
           questionText: object.questionText,
           createdAt: new Date(),
+          questionImage: object.imageData,
           status: true
         }
       }
@@ -73,13 +81,15 @@ export default new Vuex.Store({
         .then((e) => {
           const axiosConfigRe = {
             method: 'post',
-            baseURL: 'http://10.177.68.73:8080/',
+            baseURL: 'http://10.177.68.73:8084/',
             url: '/multimedia/imageQuestion',
             data: {
               images: [object.imageData],
               question_ID: e.data.questionId
             }
           }
+          console.log(axiosConfigRe.data.images)
+          console.log(axiosConfigRe.data.question_ID)
           axios(axiosConfigRe)
             .then((e) => {
               console.log(e.data)
@@ -249,8 +259,17 @@ export default new Vuex.Store({
         .then((e) => {
           console.log(e.data)
           commit('setAllQuestions', e.data)
+          // for(var i = 0; i < state.allQuestions.length; i++) {
+          //   axios.get('http://10.177.68.73:8084/ge')
+          // }
         })
         .catch(e => console.log(e))
+
+      axios.get('http://10.177.68.73:8084/multimedia/getAllQuestionImages')
+        .then(e => {
+          commit('setQuestionImages', e.data)
+          console.log(state.questionImages)
+        })
     },
     setGetParticularQuestionAction ({ commit, state }, object) {
       const axiosConfig = {
