@@ -1,11 +1,11 @@
 <template>
-  <div @click="takeToProfile(id)">
+  <div>
     <div class="u-c-s-question-answer-card">
         <div class="u-c-s-conatiner">
             <table>
                 <tr>
                     <td rowspan="4" class="u-c-s-left"><img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" class="u-c-s-image" alt=""></td>
-                    <td>{{ username }}<br>{{ firstName }} {{ lastname }}<br>{{ profession }}<br>{{ city }}, {{ country }}</td>
+                    <td> <span style="cursor: pointer" @click="takeToProfile(username)">{{ username }}</span><br>{{ firstName }} {{ lastname }}<br>{{ profession }}<br>{{ city }}, {{ country }}</td>
                 </tr>
             </table>
         </div>
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     takeToProfile (username) {
-      localStorage.setItem('gotToUsername', username)
+      localStorage.setItem('goToUsername', username)
       this.$router.push('/newUserProfile')
     }
   }

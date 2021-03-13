@@ -30,7 +30,7 @@
               </div>
               <router-link to="/profilePage"><h3>{{ userName }}</h3></router-link>
               <ul>
-                  <li><router-link to="/"><img src="../assets/logout.png">Logout</router-link></li>
+                  <li @click="onLogout"><img src="../assets/logout.png">Logout</li>
               </ul>
           </div>
       </div>
@@ -48,6 +48,10 @@ export default {
     }
   },
   methods: {
+    onLogout () {
+      localStorage.clear()
+      this.$router.push('/login')
+    },
     menuToggle () {
       const toggleMenu = document.querySelector('.menu')
       toggleMenu.classList.toggle('active')

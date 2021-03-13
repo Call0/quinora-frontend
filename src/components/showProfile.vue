@@ -3,7 +3,8 @@
       <img src="../assets/userprofile2.png" id="user-profile-photo" alt="user profile">
       <div class="profile-details">
           <h4>{{ username }}</h4>
-          <h6>Badge</h6>
+          <h6 v-if="badge === 'NoBadge' ">No Badge</h6>
+          <h6 v-else>{{ badge }}</h6>
           <input  type="file" @click="upload" id="picture" name="picture">
       </div>
   </div>
@@ -14,7 +15,8 @@ export default {
   name: 'showProfile',
   data () {
     return {
-      username: localStorage.getItem('username')
+      username: localStorage.getItem('username'),
+      badge: localStorage.getItem('badge')
     }
   },
   methods: {

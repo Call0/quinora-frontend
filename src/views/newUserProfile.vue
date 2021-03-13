@@ -7,9 +7,10 @@
           <div class="userNameDisplay"> {{ username }} </div>
           <div v-if="results.profession === null" class="userProfessionDisplay">No profession added by user</div>
           <div v-else class="userProfessionDisplay">{{ results.profession }}</div>
-          <div class="userBadgeDisplay">User Badge here</div>
+          <div v-if="badge === 'NoBadge'">No Badge</div>
+          <div v-else class="userBadgeDisplay">{{ badge }}</div>
           <div v-if="results.bio === null" class="userbio">No bio added by user</div>
-          <div v-else class="userbio">{{results.bio}}</div>
+          <div v-else class="userbio"><b>Bio:</b> {{results.bio}}</div>
           <div class="userProfileDetails">
             <ul>
               <li><a @click="viewProfileDetails">View Profile Details</a></li>
@@ -127,7 +128,8 @@ export default {
       employmentDetailShow: false,
       educationDetailShow: false,
       username: localStorage.getItem('goToUsername'),
-      results: []
+      results: [],
+      badge: ''
     }
   },
   components: {
@@ -153,6 +155,14 @@ export default {
       .catch((error) => {
         console.log(error)
       })
+    const axiosConfig1 = {
+      method: 'get',
+      baseURL: 'http://10.177.68.6:8081/',
+      url: `/badge/${localStorage.getItem('goToUsername')}`
+    }
+    axios(axiosConfig1)
+      .then(e => { this.badge = e.data.ranking })
+      .catch(e => console.log(e))
   },
   methods: {
     viewProfileDetails () {

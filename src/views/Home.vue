@@ -121,6 +121,14 @@ export default {
         console.log(localStorage.getItem('notificaionCount'))
       })
       .catch(e => console.log(e.data))
+    const axiosConfig1 = {
+      method: 'get',
+      baseURL: 'http://10.177.68.6:8081/',
+      url: `/badge/${localStorage.getItem('username')}`
+    }
+    axios(axiosConfig1)
+      .then(e => localStorage.setItem('badge', e.data.ranking))
+      .catch(e => console.log(e))
   }
 }
 </script>
