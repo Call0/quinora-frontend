@@ -111,9 +111,9 @@ export default {
   methods: {
     saveToDatabase () {
       const axiosConfig = {
-        method: 'put',
-        baseURL: 'http://10.177.68.6:8081/',
-        url: `/user/updateUser/${localStorage.getItem('username')}`,
+        method: 'post',
+        baseURL: 'http://10.177.68.11:808/',
+        url: `/details/user/updateUser/${localStorage.getItem('username')}`,
         data: {
           bio: this.$store.state.userDetails.bio,
           city: this.$store.state.userDetails.city,
@@ -126,6 +126,9 @@ export default {
           education: this.educationalDetails,
           employment: this.employmentDetails,
           username: localStorage.getItem('username')
+        },
+        headers: {
+          Authorization: localStorage.getItem('sessionId')
         }
       }
       axios(axiosConfig)

@@ -112,8 +112,11 @@ export default {
     this.$store.dispatch('setGetUserCategoriesAction', localStorage.getItem('username'))
     const axiosConfig = {
       method: 'get',
-      baseURL: 'http://10.177.68.81:8080/',
-      url: `/notification/${localStorage.getItem('username')}/count`
+      baseURL: 'http://10.177.68.11:808/',
+      url: `/quac/notification/${localStorage.getItem('username')}/count`,
+      headers: {
+        Authorization: localStorage.getItem('sessionId')
+      }
     }
     axios(axiosConfig)
       .then(e => {
@@ -123,8 +126,11 @@ export default {
       .catch(e => console.log(e.data))
     const axiosConfig1 = {
       method: 'get',
-      baseURL: 'http://10.177.68.6:8081/',
-      url: `/badge/${localStorage.getItem('username')}`
+      baseURL: 'http://10.177.68.11:808/',
+      url: `/details/badge/${localStorage.getItem('username')}`,
+        headers: {
+          Authorization: localStorage.getItem('sessionId')
+        }
     }
     axios(axiosConfig1)
       .then(e => localStorage.setItem('badge', e.data.ranking))

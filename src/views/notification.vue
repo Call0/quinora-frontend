@@ -53,7 +53,10 @@ export default {
     const axiosConfig = {
       method: 'get',
       baseURL: 'http://10.177.68.81:8080/',
-      url: `/notification/${localStorage.getItem('username')}/viewNotification`
+      url: `/notification/${localStorage.getItem('username')}/viewNotification`,
+      headers: {
+        Authorization: localStorage.getItem('sessionId')
+      }
     }
     axios(axiosConfig)
       .then(e => {
