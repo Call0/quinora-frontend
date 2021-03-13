@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="takeToProfile(id)">
     <div class="u-c-s-question-answer-card">
         <div class="u-c-s-conatiner">
             <table>
@@ -29,6 +29,12 @@ export default {
     city: String,
     country: String,
     userId: Number
+  },
+  methods: {
+    takeToProfile (username) {
+      localStorage.setItem('gotToUsername', username)
+      this.$router.push('/newUserProfile')
+    }
   }
 }
 </script>

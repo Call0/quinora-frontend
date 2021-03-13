@@ -7,8 +7,9 @@ import questions from '@/views/questions.vue'
 import questionAnswer from '@/views/questionAnswer.vue'
 import notification from '@/views/notification.vue'
 import searchByQuestion from '@/views/searchByQuestion.vue'
-import profile from '@/views/profile.vue'
+import profilepage from '@/views/profilepage.vue'
 import searchByUser from '@/views/searchByUser.vue'
+import newUserProfile from '@/views/newUserProfile.vue'
 
 Vue.use(VueRouter)
 
@@ -19,9 +20,14 @@ const routes = [
     component: home
   },
   {
-    path: '/profile',
-    name: 'profile',
-    component: profile
+    path: '/profilepage',
+    name: 'profilepage',
+    component: profilepage
+  },
+  {
+    path: '/newUserProfile',
+    name: 'newUserProfile',
+    component: newUserProfile
   },
   {
     path: '/login',

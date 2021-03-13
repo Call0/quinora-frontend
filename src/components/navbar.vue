@@ -6,7 +6,8 @@
           <li><img src="../assets/newspaper.png"/></li>
           <li><img src="../assets/browser.png"/></li>
           <li><img src="../assets/users.png"/></li>
-          <li><router-link to="/notification"><img src="../assets/alarm.png"/></router-link></li>
+          <li><router-link to="/notification"><img src="../assets/alarm.png" class="parent-img-not">
+          <span v-if="notCount > 0" class="child-text-not"><span class='not-count-css'>{{ notCount }}</span></span></router-link></li>
       </ul>
       <select name="filter" id="filter" v-model="filterType">
           <option value=null>Select Filter</option>
@@ -20,7 +21,7 @@
       <img src="../assets/more.png" id="more" @click="onClickMenu()" alt="">-->
 
       <div class="p-action">
-          <div class="profile"  @click="menuToggle()">
+          <div class="profile" @click="menuToggle()">
               <img src="../assets/profile.png">
           </div>
           <div class="menu">
@@ -42,7 +43,8 @@ export default {
     return {
       searchTerm: '',
       filterType: localStorage.getItem('filterType'),
-      userName: localStorage.getItem('username')
+      userName: localStorage.getItem('username'),
+      notCount: localStorage.getItem('notificationCount')
     }
   },
   methods: {
@@ -113,6 +115,7 @@ export default {
         width: 100vw;
         display: flex;
         flex-direction: row;
+        z-index: 100;
     }
     #logo {
         width: 100px;
@@ -189,12 +192,13 @@ export default {
         border-radius: 15px;
         transition: 0.5s;
         border: 1px solid;
-        opacity: 0;
+        display: none
     }
     .p-action .menu.active
     {
         top: 50px;
         visibility: visible;
+        display: block;
         opacity: 1;
     }
     .p-action .menu h3
@@ -214,5 +218,25 @@ export default {
     .p-action .menu ul li:hover a
     {
         color: #ff5d94;
+    }
+    .parent-img-not{
+        position: relative;
+    }
+    .child-text-not{
+        display: flex;
+        position: absolute;
+        margin-top: -30px;
+        margin-left: 10px;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        border: 3px solid #ce4745;
+        border-radius: 50%;
+        color: #ce4745;
+        padding: 5px;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 10px;
     }
 </style>

@@ -48,7 +48,7 @@ export default {
       this.$store.dispatch('setLikeAction', obj)
       setTimeout(() => {
         this.$store.dispatch('setQuestionAnswerRequestDataAction', localStorage.getItem('questionId'))
-      }, 1000)
+      }, 500)
     },
     reactionDislike () {
       const obj = {
@@ -58,7 +58,7 @@ export default {
       this.$store.dispatch('setDislikeAction', obj)
       setTimeout(() => {
         this.$store.dispatch('setQuestionAnswerRequestDataAction', localStorage.getItem('questionId'))
-      }, 1000)
+      }, 500)
     }
   }
 }

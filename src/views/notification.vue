@@ -4,9 +4,16 @@
   <div class = 'notification'>
     <h3 id="notificationTitle">Notification</h3>
     <hr>
-    <div class="user-notification" v-for="notification in notifications" :key="notification.id" :class="notification.read?'not-read':'read'">
-        <p>Your <b><a @click="onClickNot(notification.questionId)">{{ notification.questionTitle }}</a></b> is Answered by <i>{{ notification.usernameAnswered }}</i></p>
-    </div>
+    <span v-if="notifications.length > 0">
+      <div class="user-notification" v-for="notification in notifications" :key="notification.id" :class="notification.read?'not-read':'read'">
+        <p>Your <b><a @click="onClickNot(notification.questionId, notification.notificationId)">{{ notification.questionTitle }}</a></b> is Answered by <i>{{ notification.usernameAnswered }}</i></p>
+      </div>
+    </span>
+    <span v-else>
+      <div class="user-notification">
+        No Notifications.
+      </div>
+    </span>
   </div>
 </div>
 </template>
@@ -18,12 +25,28 @@ export default {
   name: 'notification',
   data () {
     return {
-      notifications: []
+      notifications: [],
+      notifCount: localStorage.getItem('notificaionCount')
     }
   },
   methods: {
-    onClickNot (id) {
-      this.$store.dispatch('setQuestionAnswerRequestDataAction', id)
+    onClickNot (id, nid) {
+      axios.put(`http://10.177.68.81:8080/notification/updateNotification/${nid}`).then((e) => {
+        const axiosConfig = {
+          method: 'get',
+          baseURL: 'http://10.177.68.81:8080/',
+          url: `/notification/${localStorage.getItem('username')}/count`
+        }
+        axios(axiosConfig)
+          .then(e => {
+            localStorage.setItem('notificationCount', e.data)
+            console.log(localStorage.getItem('notificaionCount'))
+          })
+          .catch(e => console.log(e.data))
+      }).catch(e => console.log('API fail hai bhai'))
+      setTimeout(() => {
+        this.$store.dispatch('setQuestionAnswerRequestDataAction', id)
+      }, 500)
     }
   },
   created () {

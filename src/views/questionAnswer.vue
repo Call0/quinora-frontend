@@ -21,6 +21,11 @@
                 <td class='left'>
                 </td>
                 <td class='middle'>
+                    <select class="answer-filter" id="answer-filter" @change="sortAnswer">
+                      <option value="byNew">Sort By Latest</option>
+                      <option value="byLikes">Sort By Likes</option>
+                      <option value="byDislikes">Sort By Dislikes</option>
+                    </select>
                     <div v-if="getQuestionAnswerData.length > 0">
                       <div v-for="item in getQuestionAnswerData" :key="item.id">
                           <div class="q-a-parent">
@@ -67,6 +72,16 @@ export default {
     ...mapGetters(['getQuestionAnswerData', 'getParticularQuestion'])
   },
   methods: {
+    sortAnswer () {
+      var filter = document.getElementById('answer-filter').value
+      if (filter === 'byNew') {
+        this.$store.dispatch('setQuestionAnswerRequestDataAction', localStorage.getItem('questionId'))
+      } else if (filter === 'byLikes') {
+        this.$store.dispatch('setQuestionAnswerRequestDataByLikesAction', localStorage.getItem('questionId'))
+      } else if (filter === 'byDislikes') {
+        this.$store.dispatch('setQuestionAnswerRequestDataByDislikesAction', localStorage.getItem('questionId'))
+      }
+    },
     toggleInput (event) {
       var visibility = document.getElementById(event.target.value).style.display
       console.log(event.target.value)
@@ -83,6 +98,10 @@ export default {
         ansid: id
       }
       this.$store.dispatch('deleteAnswerAction', obj)
+      setTimeout(() => {
+        this.$store.dispatch('setQuestionAnswerRequestDataAction', obj.qid)
+        this.$store.dispatch('setGetParticularQuestionAction', obj.qid)
+      }, 500)
     }
   },
   created () {
@@ -167,5 +186,12 @@ export default {
     .a-btn:hover{
       background-color: #4ca7ff;
       color: white;
+    }
+    .answer-filter{
+      margin: 10px;
+      margin-top: 20px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid lightgray
     }
 </style>

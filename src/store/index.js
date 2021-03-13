@@ -15,9 +15,17 @@ export default new Vuex.Store({
     searchByQuestionList: [],
     searchByUserList: [],
     questionImages: [],
-    userDetails: {}
+    userDetails: {},
+    questionListForUser: [],
+    currentUserDetails: {}
   },
   getters: {
+    getCurrentUserDetails (state) {
+      return state.currentUserDetails
+    },
+    getQuestionListForUser (state) {
+      return state.questionListForUser
+    },
     getUserDetails (state) {
       return state.userDetails
     },
@@ -44,6 +52,12 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setCurrentUserDetails (state, value) {
+      state.currentUserDetails = value
+    },
+    setQuestionListForUser (state, value) {
+      state.questionListForUser = value
+    },
     setUserDetails (state, value) {
       state.userDetails = value
     },
@@ -70,6 +84,18 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setQuestionListForUserAction ({ commit, state }, value) {
+      const axiosConfig = {
+        method: 'get',
+        baseURL: 'http://10.177.68.81:8080/',
+        url: `/question/all/${localStorage.getItem('username')}`
+      }
+      axios(axiosConfig)
+        .then((e) => {
+          commit('setQuestionListForUser', e.data)
+        })
+        .catch(e => console.log('NO question'))
+    },
     setUserDetailsAction ({ commit, state }, object) {
       commit('setUserDetails', object)
     },
@@ -158,6 +184,48 @@ export default new Vuex.Store({
         })
         .catch(e => console.log(e))
     },
+    setQuestionAnswerRequestDataByLikesAction ({ commit, state }, object) {
+      const axiosConfig = {
+        method: 'post',
+        baseURL: 'http://10.177.68.81:8080/',
+        url: `${localStorage.getItem('username')}/${object}/sort`,
+        data: {
+          parameter: 'byLikes'
+        }
+      }
+      console.log(object)
+      axios(axiosConfig)
+        .then((e) => {
+          console.log(e.data)
+          commit('setQuestionAnswerData', e.data)
+          console.log(state.questionAnswerData)
+          console.log('ID: ' + object)
+          localStorage.setItem('questionId', object)
+          router.push('/questionAnswer')
+        })
+        .catch(e => console.log(e))
+    },
+    setQuestionAnswerRequestDataByDislikesAction ({ commit, state }, object) {
+      const axiosConfig = {
+        method: 'post',
+        baseURL: 'http://10.177.68.81:8080/',
+        url: `${localStorage.getItem('username')}/${object}/sort`,
+        data: {
+          parameter: 'byDislikes'
+        }
+      }
+      console.log(object)
+      axios(axiosConfig)
+        .then((e) => {
+          console.log(e.data)
+          commit('setQuestionAnswerData', e.data)
+          console.log(state.questionAnswerData)
+          console.log('ID: ' + object)
+          localStorage.setItem('questionId', object)
+          router.push('/questionAnswer')
+        })
+        .catch(e => console.log(e))
+    },
     setAnswerCommentAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
@@ -176,7 +244,7 @@ export default new Vuex.Store({
     setSignUpAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.110:808/',
+        baseURL: 'http://10.177.68.11:808/',
         url: '/users/sign-up',
         data: {
           username: object.username,
@@ -188,12 +256,12 @@ export default new Vuex.Store({
           console.log(e.data)
           router.push('/categories')
         })
-        .catch(e => console.log(e))
+        .catch(e => alert(e))
     },
     setLoginAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.110:808/',
+        baseURL: 'http://10.177.68.11:808/',
         url: '/login',
         data: {
           username: object.username,
@@ -211,7 +279,7 @@ export default new Vuex.Store({
     setCategoriesAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.116:8081/',
+        baseURL: 'http://10.177.68.6:8081/',
         url: '/user/save',
         data: {
           username: localStorage.getItem('username'),
@@ -297,7 +365,7 @@ export default new Vuex.Store({
     setGetUserCategoriesAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.116:8081/',
+        baseURL: 'http://10.177.68.6:8081/',
         url: `/user/findByUserName/${localStorage.getItem('username')}`
       }
       axios(axiosConfig)
@@ -324,7 +392,7 @@ export default new Vuex.Store({
     searchByQuestionAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.116:8082/',
+        baseURL: 'http://10.177.68.6:8082/',
         url: `/search/question/${object}`
       }
       axios(axiosConfig)
@@ -338,7 +406,7 @@ export default new Vuex.Store({
     searchByAnswerAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.116:8082/',
+        baseURL: 'http://10.177.68.6:8082/',
         url: `/search/answer/${object}`
       }
       axios(axiosConfig)
@@ -350,7 +418,7 @@ export default new Vuex.Store({
     searchByUserAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.116:8082/',
+        baseURL: 'http://10.177.68.6:8082/',
         url: `/search/name/${object}`
       }
       axios(axiosConfig)
@@ -403,6 +471,36 @@ export default new Vuex.Store({
           console.log(e.data)
           router.go()
         })
+    },
+    getCurrentUserProfileAction ({ commit, state }, value) {
+      const axiosConfig = {
+        method: 'get',
+        baseURL: 'http://10.177.68.6:8081/',
+        url: `/user/findByUserName/${localStorage.getItem('username')}`
+      }
+      axios(axiosConfig)
+        .then((output) => {
+          commit('setCurrentUserDetails', output.data)
+        })
+        .catch((error) => {
+          alert('Can\'t Fetch User Details', error)
+        })
+    },
+    setNotificationCountAction ({ commit, state }, value) {
+      const axiosConfig = {
+        method: 'post',
+        baseURL: 'http://10.177.68.81:8080/',
+        url: '/notification/add',
+        data: {
+          usernameAnswered: localStorage.getItem('username'),
+          questionId: value.questionId,
+          answerId: null,
+          isRead: true
+        }
+      }
+      axios(axiosConfig)
+        .then(e => console.log(e))
+        .catch(e => console.log('No notification'))
     }
   }
 })

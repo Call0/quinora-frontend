@@ -39,6 +39,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+import axios from 'axios'
 import { mapGetters } from 'vuex'
 import sidebar from '@/components/sidebar.vue'
 import questionComponentHomeVue from '../components/questionComponentHome.vue'
@@ -88,6 +89,9 @@ export default {
     },
     deleteQues (event) {
       this.$store.dispatch('deleteQuestionAction', event.target.value)
+      setTimeout(() => {
+        this.$store.dispatch('setGetAllQuestionsAction')
+      }, 500)
     }
   },
   components: {
@@ -106,6 +110,17 @@ export default {
   created () {
     this.$store.dispatch('setGetAllQuestionsAction')
     this.$store.dispatch('setGetUserCategoriesAction', localStorage.getItem('username'))
+    const axiosConfig = {
+      method: 'get',
+      baseURL: 'http://10.177.68.81:8080/',
+      url: `/notification/${localStorage.getItem('username')}/count`
+    }
+    axios(axiosConfig)
+      .then(e => {
+        localStorage.setItem('notificationCount', e.data)
+        console.log(localStorage.getItem('notificaionCount'))
+      })
+      .catch(e => console.log(e.data))
   }
 }
 </script>

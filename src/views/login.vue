@@ -52,6 +52,8 @@ export default {
       loginPassword: ''
     }
   },
+  created () {
+  },
   methods: {
     login () {
       this.$store.dispatch('setLoginAction', {
