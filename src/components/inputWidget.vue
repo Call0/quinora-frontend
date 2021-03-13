@@ -53,7 +53,6 @@ export default {
       setTimeout(() => {
         this.$store.dispatch('setQuestionAnswerRequestDataAction', this.cid)
         this.$store.dispatch('setGetParticularQuestionAction', this.cid)
-        this.$store.dispatch('setNotificationCountAction', { questionId: this.cid })
       }, 500)
     }
   }

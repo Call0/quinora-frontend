@@ -107,6 +107,9 @@ export default {
   created () {
     this.$store.dispatch('setQuestionAnswerRequestDataAction', localStorage.getItem('questionId'))
     this.$store.dispatch('setGetParticularQuestionAction', localStorage.getItem('questionId'))
+    if (localStorage.getItem('sessionId') === null) {
+      this.$router.push('/login')
+    }
   },
   components: {
     headComponentAnswer: headComponentAnswer,

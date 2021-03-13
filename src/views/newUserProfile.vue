@@ -7,7 +7,7 @@
           <div class="userNameDisplay"> {{ username }} </div>
           <div v-if="results.profession === null" class="userProfessionDisplay">No profession added by user</div>
           <div v-else class="userProfessionDisplay">{{ results.profession }}</div>
-          <div v-if="badge === 'NoBadge'">No Badge</div>
+          <div v-if="badge === 'NoBadge'" class="userBadgeDisplay">No Badge</div>
           <div v-else class="userBadgeDisplay">{{ badge }}</div>
           <div v-if="results.bio === null" class="userbio">No bio added by user</div>
           <div v-else class="userbio"><b>Bio:</b> {{results.bio}}</div>
@@ -163,6 +163,9 @@ export default {
     axios(axiosConfig1)
       .then(e => { this.badge = e.data.ranking })
       .catch(e => console.log(e))
+    if (localStorage.getItem('sessionId') === null) {
+      this.$router.push('/login')
+    }
   },
   methods: {
     viewProfileDetails () {

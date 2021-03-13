@@ -61,6 +61,9 @@ export default {
         this.notifications = e.data
       })
       .catch(e => console.log(e.data))
+    if (localStorage.getItem('sessionId') === null) {
+      this.$router.push('/login')
+    }
   },
   components: {
     navbar: navbar

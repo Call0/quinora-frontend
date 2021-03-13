@@ -10,7 +10,7 @@
         <img :src="imageData" class="q-div-preview-img">
       </div>
       <div class="q-div-parent">
-        <input type="text" v-model="questionTitle" class="q-div-input-field" placeholder="Title">
+        <input type="text" v-model="questionTitle" class="q-div-input-field" placeholder="Title (Min 10 characters)">
         <select type="text" v-model="category" class="q-div-input-field" placeholder="Category">
             <option value="" selected>Select Category</option>
             <option value="Technology">Technology</option>
@@ -32,7 +32,7 @@
             <option value="Car">Car</option>
             <option value="History">History</option>
         </select>
-        <textarea class="q-div-input" v-model="questionText" placeholder="Ask your question here.">
+        <textarea class="q-div-input" v-model="questionText" placeholder="Ask your question here. (Min 30 characters)">
         </textarea>
       </div>
       <div class="q-div-post">

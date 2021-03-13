@@ -12,7 +12,6 @@
       <select name="filter" id="filter" v-model="filterType">
           <option value=null>Select Filter</option>
           <option value="question">Question</option>
-          <option value="answer">Answer</option>
           <option value="user">User</option>
       </select>
       <input type="text" :name="searchTerm" v-model="searchTerm" placeholder="Search...">

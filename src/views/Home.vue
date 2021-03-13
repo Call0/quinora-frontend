@@ -121,6 +121,11 @@ export default {
         console.log(localStorage.getItem('notificaionCount'))
       })
       .catch(e => console.log(e.data))
+    if (localStorage.getItem('sessionId') === null) {
+      this.$router.push('/login')
+    }
+  },
+  mounted () {
     const axiosConfig1 = {
       method: 'get',
       baseURL: 'http://10.177.68.6:8081/',

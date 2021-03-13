@@ -129,10 +129,9 @@ export default new Vuex.Store({
           axios(axiosConfigRe)
             .then((e) => {
               console.log(e.data)
-              alert('Question Posted')
             })
         })
-        .catch(e => alert('Not Added'))
+        .catch(e => console.log('Not Added'))
     },
     setAnswerRequestAction ({ commit, state }, object) {
       const axiosConfig = {
@@ -160,8 +159,9 @@ export default new Vuex.Store({
           }
           axios(axiosConfigRe)
             .then((e) => console.log(e))
+            .catch((e) => console.log(e))
         })
-        .catch(e => alert('Answer Not Posted'))
+        .catch(e => console.log('Answer Not Posted'))
     },
     setQuestionAnswerRequestDataAction ({ commit, state }, object) {
       const axiosConfig = {
@@ -256,7 +256,7 @@ export default new Vuex.Store({
           console.log(e.data)
           router.push('/categories')
         })
-        .catch(e => alert(e))
+        .catch(e => console.log(e))
     },
     setLoginAction ({ commit, state }, object) {
       const axiosConfig = {
@@ -485,22 +485,22 @@ export default new Vuex.Store({
         .catch((error) => {
           alert('Can\'t Fetch User Details', error)
         })
-    },
-    setNotificationCountAction ({ commit, state }, value) {
-      const axiosConfig = {
-        method: 'post',
-        baseURL: 'http://10.177.68.81:8080/',
-        url: '/notification/add',
-        data: {
-          usernameAnswered: localStorage.getItem('username'),
-          questionId: value.questionId,
-          answerId: null,
-          isRead: true
-        }
-      }
-      axios(axiosConfig)
-        .then(e => console.log(e))
-        .catch(e => console.log('No notification'))
     }
+    // setNotificationCountAction ({ commit, state }, value) {
+    //   const axiosConfig = {
+    //     method: 'post',
+    //     baseURL: 'http://10.177.68.81:8080/',
+    //     url: '/notification/add',
+    //     data: {
+    //       usernameAnswered: localStorage.getItem('username'),
+    //       questionId: value.questionId,
+    //       answerId: null,
+    //       isRead: true
+    //     }
+    //   }
+    //   axios(axiosConfig)
+    //     .then(e => console.log(e))
+    //     .catch(e => console.log('No notification'))
+    // }
   }
 })

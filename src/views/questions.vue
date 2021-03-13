@@ -104,6 +104,11 @@ export default {
     questionComponentHome: questionComponentHome,
     inputWidget: inputWidget,
     navbar: navbar
+  },
+  created () {
+    if (localStorage.getItem('sessionId') === null) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

@@ -204,6 +204,8 @@ export default {
       }
       this.$store.dispatch('setCategoriesAction', this.categoryList)
     }
+  },
+  created () {
   }
 }
 </script>

@@ -18,6 +18,11 @@ export default {
     navbar: navbar,
     addCredentials: addCredentials,
     tabs: tabs
+  },
+  created () {
+    if (localStorage.getItem('sessionId') === null) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

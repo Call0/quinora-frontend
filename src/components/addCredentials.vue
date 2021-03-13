@@ -30,7 +30,7 @@
           </tr>
           <tr>
             <td>
-              <span> Select Start Year </span>
+              <span> Select Completion Year </span>
             </td>
             <td>
               <select id="educationStartYear">
@@ -52,7 +52,7 @@
               <span>Position</span>
             </td>
             <td>
-              <input type='text' v-model='positionname' placeholder="Enter School Name"><br>
+              <input type='text' v-model='positionname' placeholder="Enter Position"><br>
             </td>
           </tr>
           <tr>
@@ -60,7 +60,7 @@
                <span>Company/ Organization</span>
             </td>
             <td>
-              <input type='text' v-model='companyname' placeholder="Enter Primary Details"><br>
+              <input type='text' v-model='companyname' placeholder="Enter Company"><br>
             </td>
           </tr>
           <tr>

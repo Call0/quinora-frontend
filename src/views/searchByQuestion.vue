@@ -32,6 +32,9 @@ export default {
   },
   created () {
     this.$store.dispatch('searchByQuestionAction', localStorage.getItem('searchTerm'))
+    if (localStorage.getItem('sessionId') === null) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>
