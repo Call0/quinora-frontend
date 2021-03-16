@@ -41,8 +41,8 @@ export default {
       }
     },
     validate () {
-      if (this.answerText < 10) {
-        this.$alert('Invalid Question Title, must be more than 10 characters')
+      if (this.answerText.length < 10) {
+        this.$alert('Invalid Answer Text, must be more than 10 characters')
         return false
       }
       return true
