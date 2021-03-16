@@ -63,20 +63,37 @@ export default {
         reader.readAsDataURL(input.files[0])
       }
     },
+    validate () {
+      if (this.questionText < 10) {
+        this.$alert('Invalid Question Title, must be more than 10 characters')
+        return false
+      }
+      if (this.questionText.length < 30) {
+        this.$alert('Invalid Question Text, must be more than 30 characters')
+        return false
+      }
+      return true
+    },
     onSubmit () {
-      this.$store.dispatch('setQuestionRequestAction', {
-        imageData: this.imageData,
-        questionText: this.questionText,
-        questionTitle: this.questionTitle,
-        category: this.category
-      })
-      setTimeout(() => {
-        this.$store.dispatch('setGetAllQuestionsAction')
-      }, 500)
-      this.questionText = ''
-      this.questionTitle = ''
-      this.category = ''
-      this.imageData = ''
+      if (this.validate()) {
+        this.$store.dispatch('setQuestionRequestAction', {
+          imageData: this.imageData,
+          questionText: this.questionText,
+          questionTitle: this.questionTitle,
+          category: this.category
+        })
+        setTimeout(() => {
+          this.$store.dispatch('setGetAllQuestionsAction')
+        }, 1000)
+        this.questionText = ''
+        this.questionTitle = ''
+        this.category = ''
+        this.imageData = ''
+      } else {
+        setTimeout(() => {
+          this.$store.dispatch('setGetAllQuestionsAction')
+        }, 1000)
+      }
     }
   }
 }

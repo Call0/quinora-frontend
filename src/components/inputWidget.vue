@@ -9,7 +9,7 @@
       <div class="i-div-image-preview" v-if="imageData.length > 0">
         <img :src="imageData" class="i-div-preview-img">
       </div>
-      <textarea class="i-div-input" placeholder="Add Content." cols="72" v-model="answerText">
+      <textarea class="i-div-input" placeholder="Add Content. (Min. 10 characters)" cols="72" v-model="answerText">
       </textarea>
       <div class="i-div-post">
           <button class="i-div-post-btn" @click="onSubmit">Post</button>
@@ -40,20 +40,32 @@ export default {
         reader.readAsDataURL(input.files[0])
       }
     },
+    validate () {
+      if (this.answerText < 10) {
+        this.$alert('Invalid Question Title, must be more than 10 characters')
+        return false
+      }
+      return true
+    },
     onSubmit () {
-      console.log(this.imageData)
-      console.log(this.answerText)
-      this.$store.dispatch('setAnswerRequestAction', {
-        imageData: this.imageData,
-        answerText: this.answerText,
-        questionId: this.cid
-      })
-      this.answerText = ''
-      this.imageData = ''
-      setTimeout(() => {
-        this.$store.dispatch('setQuestionAnswerRequestDataAction', this.cid)
-        this.$store.dispatch('setGetParticularQuestionAction', this.cid)
-      }, 500)
+      if (this.validate()) {
+        this.$store.dispatch('setAnswerRequestAction', {
+          imageData: this.imageData,
+          answerText: this.answerText,
+          questionId: this.cid
+        })
+        setTimeout(() => {
+          this.$store.dispatch('setQuestionAnswerRequestDataAction', this.cid)
+          this.$store.dispatch('setGetParticularQuestionAction', this.cid)
+        }, 1000)
+        this.answerText = ''
+        this.imageData = ''
+      } else {
+        setTimeout(() => {
+          this.$store.dispatch('setQuestionAnswerRequestDataAction', this.cid)
+          this.$store.dispatch('setGetParticularQuestionAction', this.cid)
+        }, 1000)
+      }
     }
   }
 }

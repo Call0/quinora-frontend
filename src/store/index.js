@@ -250,7 +250,6 @@ export default new Vuex.Store({
       }
       axios(axiosConfig)
         .then((e) => {
-          console.log(e.data)
           router.push('/categories')
         })
         .catch(e => console.log(e))
@@ -287,7 +286,7 @@ export default new Vuex.Store({
       axios(axiosConfig)
         .then((e) => {
           console.log(e.data)
-          alert('Registeration Successful, Please Login Now')
+          this.$alert('Registeration Successful, Please Login Now')
           router.push('/login')
         })
         .catch(e => console.log(e))
@@ -479,7 +478,7 @@ export default new Vuex.Store({
           commit('setCurrentUserDetails', output.data)
         })
         .catch((error) => {
-          alert('Can\'t Fetch User Details', error)
+          this.$alert('Can\'t Fetch User Details', error)
         })
     }
     // setNotificationCountAction ({ commit, state }, value) {
