@@ -53,6 +53,9 @@ export default {
     }
   },
   created () {
+    if (localStorage.getItem('sessionId') !== null) {
+      this.$router.push('/')
+    }
   },
   methods: {
     login () {

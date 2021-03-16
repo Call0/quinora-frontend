@@ -27,7 +27,6 @@ export default {
         var url = URL.createObjectURL(inputElement.files[0])
         imgElement.src = url
         this.profileImage = imgElement.src
-        console.log(imgElement.src)
       })
     }
   }

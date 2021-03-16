@@ -64,11 +64,6 @@ export default {
       }
     },
     onSubmit () {
-      console.log(this.imageData)
-      console.log(this.questionText)
-      console.log(this.questionTitle)
-      console.log(this.category)
-
       this.$store.dispatch('setQuestionRequestAction', {
         imageData: this.imageData,
         questionText: this.questionText,

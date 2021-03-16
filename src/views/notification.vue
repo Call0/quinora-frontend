@@ -31,10 +31,10 @@ export default {
   },
   methods: {
     onClickNot (id, nid) {
-      axios.put(`http://10.177.68.81:8080/notification/updateNotification/${nid}`).then((e) => {
+      axios.put(`http://10.177.68.49:8080/notification/updateNotification/${nid}`).then((e) => {
         const axiosConfig = {
           method: 'get',
-          baseURL: 'http://10.177.68.81:8080/',
+          baseURL: 'http://10.177.68.49:8080/',
           url: `/notification/${localStorage.getItem('username')}/count`
         }
         axios(axiosConfig)
@@ -52,7 +52,7 @@ export default {
   created () {
     const axiosConfig = {
       method: 'get',
-      baseURL: 'http://10.177.68.81:8080/',
+      baseURL: 'http://10.177.68.49:8080/',
       url: `/notification/${localStorage.getItem('username')}/viewNotification`
     }
     axios(axiosConfig)

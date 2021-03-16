@@ -112,7 +112,7 @@ export default {
     this.$store.dispatch('setGetUserCategoriesAction', localStorage.getItem('username'))
     const axiosConfig = {
       method: 'get',
-      baseURL: 'http://10.177.68.81:8080/',
+      baseURL: 'http://10.177.68.49:8080/',
       url: `/notification/${localStorage.getItem('username')}/count`
     }
     axios(axiosConfig)
@@ -121,19 +121,19 @@ export default {
         console.log(localStorage.getItem('notificaionCount'))
       })
       .catch(e => console.log(e.data))
-    if (localStorage.getItem('sessionId') === null) {
-      this.$router.push('/login')
-    }
-  },
-  mounted () {
     const axiosConfig1 = {
       method: 'get',
-      baseURL: 'http://10.177.68.6:8081/',
+      baseURL: 'http://10.177.68.46:8081/',
       url: `/badge/${localStorage.getItem('username')}`
     }
     axios(axiosConfig1)
       .then(e => localStorage.setItem('badge', e.data.ranking))
       .catch(e => console.log(e))
+    if (localStorage.getItem('sessionId') === null) {
+      this.$router.push('/login')
+    }
+  },
+  mounted () {
   }
 }
 </script>

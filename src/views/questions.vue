@@ -73,7 +73,7 @@ export default {
         {
           qid: 1,
           question: 'What is this?',
-          src: require('../assets/space.jpg')
+          src: ''
         },
         {
           qid: 2,
@@ -106,9 +106,11 @@ export default {
     navbar: navbar
   },
   created () {
+    /*
     if (localStorage.getItem('sessionId') === null) {
       this.$router.push('/login')
     }
+    */
   }
 }
 </script>

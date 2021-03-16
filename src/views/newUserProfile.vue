@@ -157,7 +157,7 @@ export default {
       })
     const axiosConfig1 = {
       method: 'get',
-      baseURL: 'http://10.177.68.6:8081/',
+      baseURL: 'http://10.177.68.46:8081/',
       url: `/badge/${localStorage.getItem('goToUsername')}`
     }
     axios(axiosConfig1)

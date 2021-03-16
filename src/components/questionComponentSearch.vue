@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     goToQuestions (event) {
-      console.log('My id is ' + event.target.id)
       this.$store.dispatch('setQuestionAnswerRequestDataAction', event.target.id)
     }
   }
