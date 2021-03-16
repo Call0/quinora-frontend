@@ -106,17 +106,19 @@ export default {
     }
   },
   created () {
-    if (this.getParticularQuestion.username === localStorage.getItem('username')) {
-      this.ansfilter = 'byNew'
-      this.$store.dispatch('setQuestionAnswerRequestDataAction', localStorage.getItem('questionId'))
-    } else {
-      this.ansfilter = 'byLikes'
-      this.$store.dispatch('setQuestionAnswerRequestDataByLikesAction', localStorage.getItem('questionId'))
-    }
     this.$store.dispatch('setGetParticularQuestionAction', localStorage.getItem('questionId'))
-    if (localStorage.getItem('sessionId') === null) {
-      this.$router.push('/login')
-    }
+    setTimeout(() => {
+      if (this.getParticularQuestion.username === localStorage.getItem('username')) {
+        this.ansfilter = 'byNew'
+        this.$store.dispatch('setQuestionAnswerRequestDataAction', localStorage.getItem('questionId'))
+      } else {
+        this.ansfilter = 'byLikes'
+        this.$store.dispatch('setQuestionAnswerRequestDataByLikesAction', localStorage.getItem('questionId'))
+      }
+      if (localStorage.getItem('sessionId') === null) {
+        this.$router.push('/login')
+      }
+    }, 500)
   },
   components: {
     headComponentAnswer: headComponentAnswer,
