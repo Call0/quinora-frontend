@@ -31,19 +31,23 @@ export default {
   },
   methods: {
     onClickNot (id, nid) {
-      axios.put(`http://10.177.68.49:8080/notification/updateNotification/${nid}`).then((e) => {
-        const axiosConfig = {
-          method: 'get',
-          baseURL: 'http://10.177.68.49:8080/',
-          url: `/notification/${localStorage.getItem('username')}/count`
-        }
-        axios(axiosConfig)
-          .then(e => {
-            localStorage.setItem('notificationCount', e.data)
-            console.log(localStorage.getItem('notificaionCount'))
-          })
-          .catch(e => console.log(e.data))
-      }).catch(e => console.log('API fail hai bhai'))
+      axios.put(`http://10.177.68.22:808/quac/notification/updateNotification/${nid}`, { headers: { Authorization: localStorage.getItem('sessionId') } })
+        .then((e) => {
+          const axiosConfig = {
+            method: 'get',
+            baseURL: 'http://10.177.68.22:808/',
+            url: `/quac/notification/${localStorage.getItem('username')}/count`,
+            headers: {
+              Authorization: localStorage.getItem('sessionId')
+            }
+          }
+          axios(axiosConfig)
+            .then(e => {
+              localStorage.setItem('notificationCount', e.data)
+              console.log(localStorage.getItem('notificaionCount'))
+            })
+            .catch(e => console.log(e.data))
+        }).catch(e => console.log('API fail hai bhai'))
       setTimeout(() => {
         this.$store.dispatch('setQuestionAnswerRequestDataAction', id)
       }, 500)
@@ -52,8 +56,11 @@ export default {
   created () {
     const axiosConfig = {
       method: 'get',
-      baseURL: 'http://10.177.68.49:8080/',
-      url: `/notification/${localStorage.getItem('username')}/viewNotification`
+      baseURL: 'http://10.177.68.22:808/',
+      url: `/quac/notification/${localStorage.getItem('username')}/viewNotification`,
+      headers: {
+        Authorization: localStorage.getItem('sessionId')
+      }
     }
     axios(axiosConfig)
       .then(e => {

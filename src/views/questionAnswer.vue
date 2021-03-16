@@ -21,7 +21,7 @@
                 <td class='left'>
                 </td>
                 <td class='middle'>
-                    <select class="answer-filter" id="answer-filter" @change="sortAnswer">
+                    <select v-model="ansfilter" class="answer-filter" id="answer-filter" @change="sortAnswer">
                       <option value="byNew">Sort By Latest</option>
                       <option value="byLikes">Sort By Likes</option>
                       <option value="byDislikes">Sort By Dislikes</option>
@@ -65,7 +65,8 @@ export default {
     return {
       currentUser: localStorage.getItem('username'),
       qText: '',
-      qTitle: ''
+      qTitle: '',
+      ansfilter: 'byNew'
     }
   },
   computed: {
@@ -105,7 +106,13 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('setQuestionAnswerRequestDataAction', localStorage.getItem('questionId'))
+    if (this.getParticularQuestion.username === localStorage.getItem('username')) {
+      this.ansfilter = 'byNew'
+      this.$store.dispatch('setQuestionAnswerRequestDataAction', localStorage.getItem('questionId'))
+    } else {
+      this.ansfilter = 'byLikes'
+      this.$store.dispatch('setQuestionAnswerRequestDataByLikesAction', localStorage.getItem('questionId'))
+    }
     this.$store.dispatch('setGetParticularQuestionAction', localStorage.getItem('questionId'))
     if (localStorage.getItem('sessionId') === null) {
       this.$router.push('/login')

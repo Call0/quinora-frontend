@@ -139,8 +139,11 @@ export default {
     this.username = localStorage.getItem('goToUsername')
     const axiosConfig = {
       method: 'get',
-      baseURL: 'http://10.177.68.6:8081/',
-      url: `/user/findByUserName/${this.username}`
+      baseURL: 'http://10.177.68.22:808/',
+      url: `/details/user/findByUserName/${this.username}`,
+      headers: {
+        Authorization: localStorage.getItem('sessionId')
+      }
     }
     axios(axiosConfig)
       .then((output) => {
@@ -157,8 +160,11 @@ export default {
       })
     const axiosConfig1 = {
       method: 'get',
-      baseURL: 'http://10.177.68.46:8081/',
-      url: `/badge/${localStorage.getItem('goToUsername')}`
+      baseURL: 'http://10.177.68.22:808/',
+      url: `/details/badge/${localStorage.getItem('goToUsername')}`,
+      headers: {
+        Authorization: localStorage.getItem('sessionId')
+      }
     }
     axios(axiosConfig1)
       .then(e => { this.badge = e.data.ranking })
