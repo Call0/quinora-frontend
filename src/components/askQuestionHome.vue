@@ -23,6 +23,7 @@ export default {
         padding: 10px;
         border-radius: 10px;
         width: 100%;
+        margin-bottom: 20px;
     }
     .inner-container-ask-question{
         border: 1px solid whitesmoke;
@@ -30,7 +31,6 @@ export default {
         margin-left: -10px;
         margin-right: -10px;
         border-radius: 10px;
-        margin-bottom: 20px;
         cursor: pointer;
     }
     .inner-container-text{

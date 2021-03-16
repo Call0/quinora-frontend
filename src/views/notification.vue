@@ -31,7 +31,15 @@ export default {
   },
   methods: {
     onClickNot (id, nid) {
-      axios.put(`http://10.177.68.22:808/quac/notification/updateNotification/${nid}`, { headers: { Authorization: localStorage.getItem('sessionId') } })
+      const axiosConfigRe = {
+        method: 'put',
+        baseURL: 'http://10.177.68.22:808/',
+        url: `/quac/notification/updateNotification/${nid}`,
+        headers: {
+          Authorization: localStorage.getItem('sessionId')
+        }
+      }
+      axios(axiosConfigRe)
         .then((e) => {
           const axiosConfig = {
             method: 'get',

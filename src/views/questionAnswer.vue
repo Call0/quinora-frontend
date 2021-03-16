@@ -27,7 +27,7 @@
                       <option value="byDislikes">Sort By Dislikes</option>
                     </select>
                     <div v-if="getQuestionAnswerData.length > 0">
-                      <div v-for="item in getQuestionAnswerData" :key="item.id">
+                      <div v-for="item in pageOfItems" :key="item.id">
                           <div class="q-a-parent">
                               <headComponentAnswer :username="item.userName.substring(0,1).toUpperCase() + '' + item.userName.substring(1,item.userName.length)" />
                               <answerComponentHome :answer="item.answerText.substring(0,1).toUpperCase() + '' + item.answerText.substring(1,item.answerText.length)" :src="item.imgsrc" />
@@ -41,6 +41,9 @@
                     <div v-else class="q-a-parent-height">
                       No Answers Yet.
                     </div>
+                    <center class="pagination-placement">
+                      <jw-pagination :pageSize=5 :items="getQuestionAnswerData" @changePage="onChangePage" :styles="customStyles" :labels="customLabels"></jw-pagination>
+                    </center>
                 </td>
                 <td class="right">
                 </td>
@@ -59,6 +62,21 @@ import headComponentAnswer from '../components/headComponentAnswer.vue'
 import answerComponentHome from '../components/answerComponentHome.vue'
 import footComponentQAHome from '../components/footComponentQAHome.vue'
 import questionComponentHome from '../components/questionComponentHome.vue'
+const customStyles = {
+  ul: {
+  },
+  li: {
+    display: 'inline-block'
+  },
+  a: {
+  }
+}
+const customLabels = {
+  first: '<<',
+  last: '>>',
+  previous: '<',
+  next: '>'
+}
 export default {
   name: 'questionAnswer',
   data () {
@@ -66,13 +84,19 @@ export default {
       currentUser: localStorage.getItem('username'),
       qText: '',
       qTitle: '',
-      ansfilter: 'byNew'
+      ansfilter: 'byNew',
+      pageOfItems: [],
+      customStyles,
+      customLabels
     }
   },
   computed: {
     ...mapGetters(['getQuestionAnswerData', 'getParticularQuestion'])
   },
   methods: {
+    onChangePage (pageOfItems) {
+      this.pageOfItems = pageOfItems
+    },
     sortAnswer () {
       var filter = document.getElementById('answer-filter').value
       if (filter === 'byNew') {
@@ -205,5 +229,8 @@ export default {
       padding: 5px;
       border-radius: 5px;
       border: 1px solid lightgray
+    }
+    .pagination-placement{
+      margin-bottom: 100px;
     }
 </style>

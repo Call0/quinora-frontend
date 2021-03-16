@@ -274,7 +274,11 @@ export default new Vuex.Store({
       }
       axios(axiosConfig)
         .then((e) => {
-          router.push('/categories')
+          if (e.data.length < 11) {
+            router.push('/categories')
+          } else {
+            alert('User already exists, change your username')
+          }
         })
         .catch(e => console.log(e))
     },
