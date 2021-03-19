@@ -33,7 +33,7 @@ export default {
     onClickNot (id, nid) {
       const axiosConfigRe = {
         method: 'put',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/notification/updateNotification/${nid}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -43,7 +43,7 @@ export default {
         .then((e) => {
           const axiosConfig = {
             method: 'get',
-            baseURL: 'http://10.177.68.22:808/',
+            baseURL: 'http://10.177.68.69:808/',
             url: `/quac/notification/${localStorage.getItem('username')}/count`,
             headers: {
               Authorization: localStorage.getItem('sessionId')
@@ -64,7 +64,7 @@ export default {
   created () {
     const axiosConfig = {
       method: 'get',
-      baseURL: 'http://10.177.68.22:808/',
+      baseURL: 'http://10.177.68.69:808/',
       url: `/quac/notification/${localStorage.getItem('username')}/viewNotification`,
       headers: {
         Authorization: localStorage.getItem('sessionId')

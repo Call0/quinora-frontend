@@ -139,7 +139,7 @@ export default {
     this.username = localStorage.getItem('goToUsername')
     const axiosConfig = {
       method: 'get',
-      baseURL: 'http://10.177.68.22:808/',
+      baseURL: 'http://10.177.68.69:808/',
       url: `/details/user/findByUserName/${this.username}`,
       headers: {
         Authorization: localStorage.getItem('sessionId')
@@ -160,7 +160,7 @@ export default {
       })
     const axiosConfig1 = {
       method: 'get',
-      baseURL: 'http://10.177.68.22:808/',
+      baseURL: 'http://10.177.68.69:808/',
       url: `/details/badge/${localStorage.getItem('goToUsername')}`,
       headers: {
         Authorization: localStorage.getItem('sessionId')

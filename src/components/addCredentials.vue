@@ -112,7 +112,7 @@ export default {
     saveToDatabase () {
       const axiosConfig = {
         method: 'put',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/details/user/updateUser/${localStorage.getItem('username')}`,
         data: {
           bio: this.$store.state.userDetails.bio,

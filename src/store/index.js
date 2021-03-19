@@ -87,7 +87,7 @@ export default new Vuex.Store({
     setQuestionListForUserAction ({ commit, state }, value) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/question/all/${localStorage.getItem('username')}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -105,7 +105,7 @@ export default new Vuex.Store({
     setQuestionRequestAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/question/${localStorage.getItem('username')}/add`,
         data: {
           category: object.category,
@@ -142,7 +142,7 @@ export default new Vuex.Store({
     setAnswerRequestAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/${localStorage.getItem('username')}/${object.questionId}`,
         data: {
           answerText: object.answerText,
@@ -157,7 +157,7 @@ export default new Vuex.Store({
           console.log(e.data)
           const axiosConfigRe = {
             method: 'post',
-            baseURL: 'http://10.177.68.22:808/',
+            baseURL: 'http://10.177.68.69:808/',
             url: '/quac/notification/add',
             data: {
               usernameAnswered: localStorage.getItem('username'),
@@ -178,7 +178,7 @@ export default new Vuex.Store({
     setQuestionAnswerRequestDataAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/${localStorage.getItem('username')}/${object}/sort`,
         data: {
           parameter: 'byNew'
@@ -202,7 +202,7 @@ export default new Vuex.Store({
     setQuestionAnswerRequestDataByLikesAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/${localStorage.getItem('username')}/${object}/sort`,
         data: {
           parameter: 'byLikes'
@@ -226,7 +226,7 @@ export default new Vuex.Store({
     setQuestionAnswerRequestDataByDislikesAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/${localStorage.getItem('username')}/${object}/sort`,
         data: {
           parameter: 'byDislikes'
@@ -247,7 +247,7 @@ export default new Vuex.Store({
     setAnswerCommentAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/postComment/${localStorage.getItem('username')}`,
         data: {
           answerId: object.answerId,
@@ -265,7 +265,7 @@ export default new Vuex.Store({
     setSignUpAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: '/users/sign-up',
         data: {
           username: object.username,
@@ -285,7 +285,7 @@ export default new Vuex.Store({
     setLoginAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: '/login',
         data: {
           username: object.username,
@@ -303,7 +303,7 @@ export default new Vuex.Store({
     setCategoriesAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.46:8081/',
+        baseURL: 'http://10.177.68.65:8081/',
         url: '/user/save',
         data: {
           username: localStorage.getItem('username'),
@@ -325,7 +325,7 @@ export default new Vuex.Store({
     setLikeAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/reaction/${localStorage.getItem('username')}`,
         data: {
           answerId: object.answerId,
@@ -344,7 +344,7 @@ export default new Vuex.Store({
     setDislikeAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'post',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/reaction/${localStorage.getItem('username')}`,
         data: {
           answerId: object.answerId,
@@ -363,7 +363,7 @@ export default new Vuex.Store({
     setGetAllQuestionsAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: '/quac/question/all',
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -387,7 +387,7 @@ export default new Vuex.Store({
     setGetParticularQuestionAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/question/question-id/${object}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -403,7 +403,7 @@ export default new Vuex.Store({
     setGetUserCategoriesAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/details/user/findByUserName/${localStorage.getItem('username')}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -420,7 +420,7 @@ export default new Vuex.Store({
     setGetQuestionsByCategoryAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/question/${object.category}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -436,7 +436,7 @@ export default new Vuex.Store({
     searchByQuestionAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/shikhar/search/question/${object}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -453,7 +453,7 @@ export default new Vuex.Store({
     searchByAnswerAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/shikhar/search/answer/${object}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -468,7 +468,7 @@ export default new Vuex.Store({
     searchByUserAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/shikhar/search/name/${object}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -485,7 +485,7 @@ export default new Vuex.Store({
     deleteQuestionAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'put',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/question/${localStorage.getItem('username')}/disable/${object}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')
@@ -500,7 +500,7 @@ export default new Vuex.Store({
     deleteAnswerAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'put',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/${localStorage.getItem('username')}/${object.qid}/delete`,
         data: {
           answerId: object.ansid
@@ -518,7 +518,7 @@ export default new Vuex.Store({
     deleteCommentAction ({ commit, state }, object) {
       const axiosConfig = {
         method: 'put',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/quac/deleteComment/${localStorage.getItem('username')}`,
         data: {
           commentId: object,
@@ -537,7 +537,7 @@ export default new Vuex.Store({
     getCurrentUserProfileAction ({ commit, state }, value) {
       const axiosConfig = {
         method: 'get',
-        baseURL: 'http://10.177.68.22:808/',
+        baseURL: 'http://10.177.68.69:808/',
         url: `/details/user/findByUserName/${localStorage.getItem('username')}`,
         headers: {
           Authorization: localStorage.getItem('sessionId')

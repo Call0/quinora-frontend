@@ -112,7 +112,7 @@ export default {
     this.$store.dispatch('setGetUserCategoriesAction', localStorage.getItem('username'))
     const axiosConfig = {
       method: 'get',
-      baseURL: 'http://10.177.68.22:808/',
+      baseURL: 'http://10.177.68.69:808/',
       url: `/quac/notification/${localStorage.getItem('username')}/count`,
       headers:{
         Authorization: localStorage.getItem('sessionId')
@@ -126,7 +126,7 @@ export default {
       .catch(e => console.log(e.data))
     const axiosConfig1 = {
       method: 'get',
-      baseURL: 'http://10.177.68.22:808/',
+      baseURL: 'http://10.177.68.69:808/',
       url: `/details/badge/${localStorage.getItem('username')}`,
       headers:{
         Authorization: localStorage.getItem('sessionId')
